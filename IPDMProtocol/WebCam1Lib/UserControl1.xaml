@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="WebCam1Lib.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WebCam1Lib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:MainWindow1 />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Video player  -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="130" />
+            </Grid.RowDefinitions>
+            <Label Content="Video player"  Foreground="White"/>
+            <Border Grid.Row="1"
+                        BorderBrush="White"
+                        BorderThickness="1">
+                <Image Source="{Binding Image}" Height="130" />
+            </Border>
+        </Grid>
+
+        <!--  Source selection  -->
+        <Label Grid.Row="1" Content="Source selection" 
+                Foreground="White"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="23" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   VerticalAlignment="Center" 
+                   Foreground="White"
+                   Content="Webcam"/>
+            <ComboBox Grid.Row="0"
+                      Margin="60,4,0,4"
+                      Width="150"
+                      Height="22"
+                      Foreground="DarkCyan"
+                    Background="White"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      DisplayMemberPath="Name"
+                      ItemsSource="{Binding VideoDevices}"
+                      SelectedItem="{Binding CurrentDevice}" />
+
+            <!--  Video commands  -->
+            <Label Grid.Row="1" Content="Video Commands" Foreground="White"/>
+            <Button Grid.Row="2"
+                        Width="100"
+                        Height="20"
+                        Margin="90,6,0,7"
+                        HorizontalAlignment="Left"
+                    Foreground="DarkCyan"
+                    Background="White"
+                        Command="{Binding StartSourceCommand}"
+                        Content="Start video" />
+            <Button Grid.Row="2"
+                        Width="100"
+                        Height="20"
+                    Foreground="DarkCyan"
+                    Background="White"
+                        Margin="0,6,90,7"
+                        HorizontalAlignment="Right"
+                        Command="{Binding StopSourceCommand}"
+                        Content="Stop video" />
+            <Button Grid.Row="3"
+                    Name="startRecord"
+                    Width="100"
+                    Foreground="DarkCyan"
+                    Background="White"
+                    Height="32"
+                    
+                    Margin="90,6,0,7"
+                    HorizontalAlignment="Left"
+                    Command="{Binding StartRecordingCommand}"
+                    Content="Start rec" Grid.ColumnSpan="2" Click="startRecord_Click" Visibility="Hidden" />
+            <Button Grid.Row="3"
+                    Name="stopRecord"
+                    Width="100"
+                    Foreground="DarkCyan"
+                    Background="White"
+                    Height="32"
+                    Margin="0,6,90,7"
+                    HorizontalAlignment="Right"
+                    Command="{Binding StopRecordingCommand}"
+                    Content="Stop rec" RenderTransformOrigin="1.56,0.533" Grid.ColumnSpan="2" Visibility="Hidden" />
+        </Grid>
+    </Grid>
+</UserControl>
